@@ -85,8 +85,32 @@ controller.on('bot_channel_join', function (bot, message) {
     bot.reply(message, "I'm here!")
 });
 
+// "listener"
+/*
+ * mention?
+ * direct_metion?
+
+ * need to add the api.ai "hears" here
+ */
+//controller.hears('hello', 'direct_message', apiai.eears, function (bot, message) {
 controller.hears('hello', 'direct_message', function (bot, message) {
     bot.reply(message, 'Hello!');
+});
+
+// example of the 'flights' intent
+/**
+* theoratically we can chat to the bot
+* I want to go in 2 days
+* 
+*
+*
+*/
+controller.hears('flights', 'direct_message', apiai.hears, function (bot, message) {
+   if(message.fulfillment.speech !== '') {
+       bot.reply(message, message.fulfillment.speech);
+   } else {
+       bot.reply(message, "You requested to fly to " + message.entities['geo-city'] + " on " + message.entities['date']+".");
+   }
 });
 
 
